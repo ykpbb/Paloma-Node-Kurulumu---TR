@@ -24,3 +24,24 @@ Buraya, gezginde görünecek olan takma adınızı (doğrulayıcı) girmelisiniz
 ```
 NODENAME=<MONIKER_ADINIZ>
 ```
+Değişkenleri sisteme kaydedin ve içe aktarın.
+```
+PALOMA_PORT=10
+echo "export NODENAME=$NODENAME" >> $HOME/.bash_profile
+if [ ! $WALLET ]; then
+	echo "export WALLET=wallet" >> $HOME/.bash_profile
+fi
+echo "export PALOMA_CHAIN_ID=paloma-testnet-5" >> $HOME/.bash_profile
+echo "export PALOMA_PORT=${PALOMA_PORT}" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+```
+
+## Paketleri Güncelleyin
+```
+sudo apt update && sudo apt upgrade -y
+```
+
+## Bağımlılıkları Yükleyin
+```
+sudo apt install curl build-essential git wget jq make gcc tmux -y
+```
