@@ -22,10 +22,6 @@ Full node kurulumu için aşağıdaki yönergeleri adım adım takip edin.
 
 ### Değişkenleri Ayarlama
 Buraya, gezginde görünecek olan takma adınızı (doğrulayıcı) girmelisiniz.
+
 NODENAME=<MONIKER_ADINIZ>
 ```
-
-
-
-
-
