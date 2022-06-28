@@ -98,3 +98,62 @@ sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.
 sed -i.bak -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:${PALOMA_PORT}317\"%; s%^address = \":8080\"%address = \":${PALOMA_PORT}080\"%; s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:${PALOMA_PORT}090\"%; s%^address = \"0.0.0.0:9091\"%address = \"0.0.0.0:${PALOMA_PORT}091\"%" $HOME/.paloma/config/app.toml
 ```
 
+## Dizin Eklemeyi Devre Dışı Bırakın
+```
+indexer="null"
+sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.paloma/config/config.toml
+```
+
+## Pruning Yapılandırın
+```
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="50"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.paloma/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.paloma/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.paloma/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.paloma/config/app.toml
+```
+
+## Minimum Gas Fiyatını Ayarlayın
+```
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0ugrain\"/" $HOME/.paloma/config/app.toml
+```
+
+## Prometheus Etkinleştirin
+```
+sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.paloma/config/config.toml
+```
+
+## Zincir Verilerini Sıfırlayın
+```
+palomad tendermint unsafe-reset-all --home $HOME/.paloma
+```
+
+## Servis Oluşturun
+```
+sudo tee /etc/systemd/system/palomad.service > /dev/null <<EOF
+[Unit]
+Description=paloma
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which palomad) start --home $HOME/.paloma
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+## Kaydolun ve Hizmeti Başlatın
+```
+sudo systemctl daemon-reload
+sudo systemctl enable palomad
+sudo systemctl restart palomad && sudo journalctl -u palomad -f -o cat
+```
+
