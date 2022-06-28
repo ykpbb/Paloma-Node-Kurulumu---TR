@@ -21,5 +21,7 @@ Explorer:
 Full node kurulumu için aşağıdaki yönergeleri adım adım takip edin.
 
 ### Değişkenleri Ayarlama
-Buraya, gezginde görünecek olan takma adınızın (doğrulayıcı) adını girmelisiniz.
-> NODENAME=<YOUR_MONIKER_NAME_GOES_HERE>
+Buraya, gezginde görünecek olan takma adınızı (doğrulayıcı) girmelisiniz.
+> `NODENAME=<MONIKER_ADINIZ>`
+
+
