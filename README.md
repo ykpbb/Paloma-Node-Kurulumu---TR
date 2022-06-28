@@ -1,8 +1,7 @@
 # Paloma-Node-Kurulumu---TR
 Paloma Node Kurulumu Türkçe Kaynak
 
-Explorer:
--https://paloma.explorers.guru/
+Explorer: https://paloma.explorers.guru/
 
 ## SİSTEM GEREKSİNİMLERİ
 ### Minimum Sistem Gereksinimleri
@@ -22,6 +21,6 @@ Full node kurulumu için aşağıdaki yönergeleri adım adım takip edin.
 
 ### Değişkenleri Ayarlama
 Buraya, gezginde görünecek olan takma adınızı (doğrulayıcı) girmelisiniz.
-
+```
 NODENAME=<MONIKER_ADINIZ>
 ```
